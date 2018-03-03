@@ -1,0 +1,85 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarPaciente( input.value )" type="text" class="form-control" placeholder="Buscar paciente...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/paciente','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                  <i class="fa fa-plus"></i> 
+                  Crear Paciente
+                </button>
+                </div>
+
+                <h3 class="card-title">Pacientes registrados ( <small> {{ _pacienteService.totalPacientes }} </small> )</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Historia Clínica</th>
+                            <th>Nombre</th>
+                            <th>Especie</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paciente of pacientes">
+                            <td>
+                                <img [src]="paciente.img | imagen:'paciente'" class="img-50 img-circle">
+                            </td>
+                            <td>
+                                {{ paciente.historiaClinica }}
+                            </td>
+                            <td>
+                                {{ paciente.nombre }}<br>{{ paciente.nombrePropietario}}
+                            </td>
+                            <td>
+                                {{ paciente.especie }}<br>{{paciente.raza}}
+                            </td>
+                            <td>
+                                <button [routerLink]="['/historia', paciente._id ]" class="btn btn-success btn-sm">
+                                        <i class="fa fa-archive"> Expediente</i>
+                                      </button>
+
+                                <button [routerLink]="['/eventomedico/CONSULTA/', paciente._id ]" class="btn btn-outline-success btn-sm">
+                              <i class="fa fa-stethoscope"> Consulta</i>
+                            </button>
+                                <button type="button" [routerLink]="['/eventomedico/SEGUIMIENTO/', paciente._id ]" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-thermometer"> Seguimiento</i>
+                              </button>
+                                <button type="button" [routerLink]="['/eventomedico/HOSPITALIZACION/', paciente._id ]" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-plus"> Hospi.</i>
+                              </button>
+
+                                <button type="button" [routerLink]="['/paciente', paciente._id ]" class="btn btn-info btn-sm">
+                                <i class="fa fa-edit" alt="editar"> Editar</i>
+                              </button>
+                                <!--
+                                <button type="button" (click)="borrarPaciente( paciente )" class="btn btn-danger btn-sm" >
+                              <i class="fa fa-trash-o"></i>
+                            </button>
+                        -->
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

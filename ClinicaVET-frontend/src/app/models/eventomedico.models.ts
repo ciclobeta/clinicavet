@@ -1,0 +1,35 @@
+export class EventoMedico {
+
+    constructor(
+        public paciente?: string,
+        public tipoEvento?: string,
+        public fecha?: string,
+        public anamnesis?: string,
+        public estadoMental?: string,
+        public simetriaFacial?: string,
+        public reflejoPupilar?: string,
+        public condicionCorporal?: string,
+        public peso?: string,
+        public temperatura?: string,
+        public fc?: string,
+        public fr?: string,
+        public tllc?: string,
+        public pc?: string,
+        public mmOral?: string,
+        public mmVulvar?: string,
+        public mmEsclerotica?: string,
+        public mmNasal?: string,
+        public mmConjuntival?: string,
+        public motilidadIntestinal?: string,
+        public observaciones?: string,
+        public hallazgos?: string,
+        public problemas?: string,
+        public maestra?: string,
+        public diagnosticoDiferencial?: string,
+        public diagnosticoTrabajo?: string,
+        public tratamiento?: string,
+        public img?: string,
+        public usuario?: string,
+        public _id?: string
+    ) { }
+}

@@ -1,0 +1,45 @@
+<!--
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarPaciente( input.value )" type="text" class="form-control" placeholder="Buscar paciente...">
+
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!--
+                <div class="text-right">
+                    <button [routerLink]="['/paciente','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                  <i class="fa fa-plus"></i> 
+                  Crear Paciente
+                </button>
+                </div>
+              -->
+                <h3 class="card-title">Expediente Clínico ( <small> {{ paciente.historiaClinica }} </small> )</h3>
+                <img [src]="paciente.img | imagen:'paciente'" class="img-50 img-circle">
+                <strong>{{ paciente.nombre }}</strong> <br>{{ paciente.especie }} ({{paciente.raza}})
+                <br>Propietario: {{ paciente.nombrePropietario}}
+                <br> eventos:
+                <div *ngFor="let eventoMedico of eventosMedicos">
+
+
+                    Fecha: {{ eventoMedico.fecha }}
+                    <br>Evento: {{ eventoMedico.tipoEvento }}
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

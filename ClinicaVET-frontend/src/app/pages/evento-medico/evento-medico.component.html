@@ -1,0 +1,276 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-9">
+        <div class="card card-body">
+            <!--<h3 class="box-title m-b-0">{{tipoEvento}}</h3>-->
+            <div *ngIf="tipoEvento=='CONSULTA'" class="alert alert-success" role="alert">
+                <strong>Consulta</strong><br><small>Expediente clínico</small>
+            </div>
+            <div *ngIf="tipoEvento=='SEGUIMIENTO'" class="alert alert-info" role="alert">
+                <strong>Seguimiento</strong><br><small>Expediente clínico</small>
+            </div>
+            <div *ngIf="tipoEvento=='HOSPITALIZACION'" class="alert alert-info" role="alert">
+                <strong>Hoitalizacion</strong><br><small>Expediente clínico</small>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarEventoMedico(f)">
+                        <div class="form-group">
+
+                            <div *ngIf="!paciente.nombre">
+                                <label>Paciente</label>
+                                <select (change)="cambioPaciente( $event.target.value )" [(ngModel)]="eventoMedico.paciente" name="paciente" class="form-control" required>
+                                    <option value="">Seleccione el paciente</option>
+                                    <option *ngFor="let paciente of pacientes" [value]="paciente._id">
+                                      {{ paciente.historiaClinica }} : {{ paciente.nombre}}
+                                    </option>
+                                  </select>
+                            </div>
+                            <div *ngIf="paciente.nombre">
+                                <br> <b>{{ paciente.historiaClinica }} </b>: {{ paciente.nombre}}
+                                <br> {{paciente.especie}} ({{paciente.raza}})
+                                <br> {{paciente.sexo}}
+                                <br> Fecha de nacimiento: {{paciente.fechaNacimiento}}
+                                <hr>Propietario: {{paciente.nombrePropietario}}
+                                <br> email: {{paciente.email}}
+                            </div>
+                        </div>
+                        <br>
+
+                        <hr>
+                        <h3>Anamnesis</h3>
+                        <div class="form-group">
+                            <!-- <label>Anamnesis</label> 
+                            <input [(ngModel)]="eventoMedico.anamnesis" name="anamnesis" type="text" class="form-control" placeholder="Anamnesis" required>
+                            -->
+                            <textarea [(ngModel)]="eventoMedico.anamnesis" name="anamnesis" class="form-control" placeholder="" rows="5"></textarea>
+                        </div>
+
+
+                        <div *ngIf="tipoEvento!='HOSPITALIZACION'">
+                            <h3>Examen Clínico General</h3>
+
+                            <table style="width:100%">
+                                <div class="form-group">
+                                    <tr>
+                                        <!--<div class="form-group">-->
+                                        <td align=right>
+                                            <label>Estado mental: </label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.estadoMental" name="estadoMental" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!--</div>-->
+
+                                        <!--<div class="form-group">-->
+                                        <td align=right>
+                                            <label>Simetria Facial: </label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.simetriaFacial" name="simetriaFacial" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <!--</div>-->
+                                        <!--<div class="form-group">-->
+                                    </tr>
+                                    <tr>
+
+                                        <td align=right>
+                                            <label>Reflejo pupilar: </label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.reflejoPupilar" name="reflejoPupilar" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <!--</div>-->
+
+                                    </tr>
+                                </div>
+                            </table>
+
+
+                            <div class="form-group">
+
+                                <label>Condición corporal: </label>
+
+                                <input [(ngModel)]="eventoMedico.condicionCorporal" name="condicionCorporal" type="text" class="form-control" placeholder="" required>
+
+                            </div>
+
+                            <table style="width:100%">
+                                <div class="form-group">
+                                    <tr>
+                                        <td align=right>
+                                            <label>Temp.</label>
+                                        </td>
+
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.temperatura" name="temperatura" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <td align=right>
+                                            <label>Peso</label>
+                                        </td>
+
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.peso" name="peso" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            <label>FC:</label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.fc" name="fc" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <td align=right>
+                                            <label>FR:</label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.fr" name="fr" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <td align=right>
+                                            <label>TLLC:</label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.tllc" name="tllc" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                        <td align=right>
+                                            <label>PC:</label>
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.pc" name="pc" type="text" class="form-control" placeholder="" required>
+                                        </td>
+
+                                    </tr>
+                                </div>
+                            </table>
+                            <div class="form-group">
+
+                                <table style="width:100%">
+                                    <tr>
+                                        <td align=left>
+                                            <b> Membrana mucosas</b>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            Oral:
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.mmOral" name="mmOral" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            Vulvar/Prepucial:
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.mmVulvar" name="mmVulvar" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            Esclerotica:
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.mmEsclerotica" name="mmEsclerotica" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            Nasal:
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.mmNasal" name="mmNasal" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=right>
+                                            Conjuntival:
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="eventoMedico.mmConjuntival" name="mmConjuntival" type="text" class="form-control" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Motilidad intestinal</label>
+                                <input [(ngModel)]="eventoMedico.motilidadIntestinal" name="motilidadIntestinal" type="text" class="form-control" placeholder="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Observaciones del examen clínico</label>
+                                <textarea [(ngModel)]="eventoMedico.observaciones" name="observaciones" class="form-control" placeholder="" rows="5"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hallazgos durante el examen clínico</label>
+                                <textarea [(ngModel)]="eventoMedico.hallazgos" name="hallazgos" class="form-control" placeholder="" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <h3>Diagnóstico</h3>
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <label>Lista de problemas</label>
+                                    <textarea [(ngModel)]="eventoMedico.problemas" name="problemas" class="form-control" placeholder="I. " rows="5"></textarea>
+                                </td>
+                                <td>
+                                    <label>Lista maestra</label>
+                                    <textarea [(ngModel)]="eventoMedico.maestra" name="maestra" class="form-control" placeholder="1. " rows="5"></textarea>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <label>Diagnósticos diferenciales</label>
+                            <textarea [(ngModel)]="eventoMedico.diagnosticoDiferencial" name="diagnosticoDiferencial" class="form-control" placeholder="" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Diagnóstico de trabajo</label>
+                            <textarea [(ngModel)]="eventoMedico.diagnosticoTrabajo" name="diagnosticoTrabajo" class="form-control" placeholder="" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tratamiento</label>
+                            <textarea [(ngModel)]="eventoMedico.tratamiento" name="tratamiento" class="form-control" placeholder="" rows="5"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                      </button>
+                        <a routerLink="/medicos" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">{{paciente.nombre}}</h4>
+
+            <img [src]="paciente.img | imagen:'paciente'" class="img-circle img-fluid pointer">
+        </div>
+    </div>
+
+    <!--
+    <div class="col-md-3" *ngIf="paciente._id">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Fotografía del paciente</h4>
+
+            <img (click)="cambiarFoto()" [src]="paciente.img | imagen:'paciente'" class="img-circle img-fluid pointer">
+        </div>
+    </div>
+    -->
+
+</div>
