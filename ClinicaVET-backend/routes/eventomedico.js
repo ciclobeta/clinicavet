@@ -62,7 +62,7 @@ app.get('/:id', (req, res) => {
         .where('paciente').equals(id2)
         //.populate('usuario', 'nombre email img tarjeta')
         //.populate('paciente')
-        //.sort('-fecha')
+        .sort('-fecha')
 
     .exec((err, eventosmedicos) => {
 
@@ -90,9 +90,11 @@ app.get('/:id', (req, res) => {
 
         res.status(200).json({
             ok: true,
-            eventosmedicos: eventosmedicos
+            eventosmedicos: eventosmedicos,
+            texto: 'Veamos....'
         });
         console.log('3. en findBy:  Ok' + eventosmedicos);
+        console.log('3. en findBy:  cantidad: ' + eventosmedicos.length);
 
     })
 

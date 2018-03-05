@@ -27,17 +27,166 @@
               -->
                 <h3 class="card-title">Expediente Clínico ( <small> {{ paciente.historiaClinica }} </small> )</h3>
                 <img [src]="paciente.img | imagen:'paciente'" class="img-50 img-circle">
-                <strong>{{ paciente.nombre }}</strong> <br>{{ paciente.especie }} ({{paciente.raza}})
+                <br><strong>{{ paciente.nombre }}</strong> <br>{{ paciente.especie }} ({{paciente.raza}})
                 <br>Propietario: {{ paciente.nombrePropietario}}
-                <br> eventos:
-                <div *ngFor="let eventoMedico of eventosMedicos">
+                <br> <br>
+                <hr>
+                <div *ngFor="let eventoMedico of eventosMedicosX">
+
+                    <h2>
+                        <span class="badge badge-success" *ngIf="eventoMedico.tipoEvento == 'CONSULTA'">
+                                <strong>{{eventoMedico.tipoEvento}} {{eventoMedico.fecha | date:'yyyy-MM-dd'}}</strong> 
+                        </span>
+                        <span class="badge badge-info" *ngIf="eventoMedico.tipoEvento == 'SEGUIMIENTO'">
+                                <strong>{{eventoMedico.tipoEvento}} {{eventoMedico.fecha | date:'yyyy-MM-dd'}}</strong> 
+                        </span>
+                        <span class="badge badge-danger" *ngIf="eventoMedico.tipoEvento == 'HOSPITALIZACION'">
+                                <strong>{{eventoMedico.tipoEvento}} {{eventoMedico.fecha | date:'yyyy-MM-dd'}}</strong> 
+                        </span>
+                        <br>{{eventoMedico.fecha | date:'HH:mm a'}}
+
+                    </h2>
+
+                    <br>
+                    <h4>Anamnesis</h4>{{eventoMedico.anamnesis}}
+                    <br><br>
+                    <h4>Hallazgos del examen</h4>{{eventoMedico.hallazgos}}
+                    <br><br>
+                    <h4>Diagnóstico</h4>{{eventoMedico.diagnosticoTrabajo}}
+                    <br><br>
+                    <h4>Tratamiento</h4>{{eventoMedico.tratamiento}}
+                    <br>
+                    <!-- <br><span class="badge badge-dark">Examen médico</span> -->
+                    <br>
+                    <p>
+                        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" *ngIf="eventoMedico.tipoEvento !== 'HOSPITALIZACION'">
+                              Examen médico
+                            </a>
+
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+
+                            <ul>
+                                <li><b>Estado mental:  </b> {{eventoMedico.estadoMental}}</li>
+
+                                <li><b>Simetria facial:  </b>{{eventoMedico.simetriaFacial}}</li>
+
+                                <li><b>Reflejo pupilar:  </b>{{eventoMedico.reflejoPupilar}}</li>
+
+                                <li><b>Condición coportal:  </b>{{eventoMedico.condicionCorporal}}</li>
+
+                                <li><b>Peso:  </b>{{eventoMedico.peso}}</li>
+
+                                <li><b>Temperatura:  </b>{{eventoMedico.temperatura}}</li>
+
+                                <li><b>Frecuencia cardiaca:  </b>{{eventoMedico.fc}}</li>
+
+                                <li><b>Frecuencia respiratoria:  </b>{{eventoMedico.fr}}</li>
+
+                                <li><b>TLLC:  </b>{{eventoMedico.tllc}}</li>
+
+                                <li><b>PC:  </b>{{eventoMedico.pc}}</li>
+
+                                <li><b>Menbranas mucosas  </b>
+                                    <li><b>Oral:  </b>{{eventoMedico.mmOral}}</li>
+
+                                    <li><b>Vulvar/prepucial:  </b>{{eventoMedico.mmVulvar}}</li>
+
+                                    <li><b>Esclerotica:  </b>{{eventoMedico.mmEsclerotica}}</li>
+
+                                    <li><b>Nasal:  </b>{{eventoMedico.mmNasal}}</li>
+
+                                    <li><b>Conjuntival:  </b>{{eventoMedico.mmConjuntival}}</li>
+
+                                    <li><b>Motilidad instestinal:  </b>{{eventoMedico.motilidadIntestinal}}</li>
+                            </ul>
 
 
-                    Fecha: {{ eventoMedico.fecha }}
-                    <br>Evento: {{ eventoMedico.tipoEvento }}
+                        </div>
+                    </div>
 
+                    <hr>
                 </div>
 
+
+
+
+
+                <!--
+        <div *ngFor="let eventoMedico of eventosMedicosX">
+            <div class="card border-info mb-3" style="max-width: 50rem;">
+                <div class="card-header">
+                    <strong>{{eventoMedico.tipoEvento}}</strong> <br>{{eventoMedico.fecha}}
+                </div>
+                <div class="card-body text-info">
+                    <p class="card-text">
+                        <strong>Anamnesis</strong><br> {{eventoMedico.anamnesis}}
+                        <br><br> <strong>Hallazgos del examen</strong> <br>{{eventoMedico.hallazgos}}
+                        <br><br> <strong>Diagnóstico</strong> <br>{{eventoMedico.diagnosticoTrabajo}}
+                        <br><br> <strong>Tratamiento</strong> <br>{{eventoMedico.tratamiento}}
+                    </p>
+
+
+                    <h5 class="card-title">Examen médico</h5>
+                    <p class="card-text">
+                        <strong>Estado mental: </strong> {{eventoMedico.estadoMental}}
+                        <br> <strong>Simetria facial: </strong>{{eventoMedico.simetriaFacial}}
+                        <br> <strong>Reflejo pupilar: </strong>{{eventoMedico.reflejoPupilar}}
+                        <br> <strong>Condición coportal: </strong>{{eventoMedico.condicionCorporal}}
+                        <br> <strong>Peso: </strong>{{eventoMedico.peso}}
+                        <br> <strong>Temperatura: </strong>{{eventoMedico.temperatura}}
+                        <br> <strong>Frecuencia cardiaca: </strong>{{eventoMedico.fc}}
+                        <br> <strong>Frecuencia respiratoria: </strong>{{eventoMedico.fr}}
+                        <br> <strong>TLLC: </strong>{{eventoMedico.tllc}}
+                        <br> <strong>PC: </strong>{{eventoMedico.pc}}
+                        <br> <strong>Menbranas mucosas </strong>
+                        <br> <strong>Oral: </strong>{{eventoMedico.mmOral}}
+                        <br> <strong>Vulvar/prepucial: </strong>{{eventoMedico.mmVulvar}}
+                        <br> <strong>Esclerotica: </strong>{{eventoMedico.mmEsclerotica}}
+                        <br> <strong>Nasal: </strong>{{eventoMedico.mmNasal}}
+                        <br> <strong>Conjuntival: </strong>{{eventoMedico.mmConjuntival}}
+                        <br> <strong>Motilidad instestinal: </strong>{{eventoMedico.motilidadIntestinal}}
+
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    -->
+                <!--
+                <div *ngFor="let eventoMedico of eventosMedicosX">
+                    <vertical-timeline-card [dateValue]="'1-2-2018'" [timeString]="'15:18'">
+                        <h4>{{eventoMedico.tipoEvento}}</h4>
+                        {{eventoMedico.fecha}}<br>
+                        <strong>Anamnesis</strong><br> {{eventoMedico.anamnesis}}
+                        <br><br> <strong>Hallazgos del examen</strong> <br>{{eventoMedico.hallazgos}}
+                        <br><br> <strong>Diagnóstico</strong> <br>{{eventoMedico.diagnosticoTrabajo}}
+                        <br><br> <strong>Tratamiento</strong> <br>{{eventoMedico.tratamiento}}
+                    </vertical-timeline-card>
+                    <vertical-timeline-card [dateValue]="'1-2-2018'" [timeString]="'15:18'">
+                        <h4>Examen médico</h4>
+                        <strong>Estado mental: </strong> {{eventoMedico.estadoMental}}
+                        <br> <strong>Simetria facial: </strong>{{eventoMedico.simetriaFacial}}
+                        <br> <strong>Reflejo pupilar: </strong>{{eventoMedico.reflejoPupilar}}
+                        <br> <strong>Condición coportal: </strong>{{eventoMedico.condicionCorporal}}
+                        <br> <strong>Peso: </strong>{{eventoMedico.peso}}
+                        <br> <strong>Temperatura: </strong>{{eventoMedico.temperatura}}
+                        <br> <strong>Frecuencia cardiaca: </strong>{{eventoMedico.fc}}
+                        <br> <strong>Frecuencia respiratoria: </strong>{{eventoMedico.fr}}
+                        <br> <strong>TLLC: </strong>{{eventoMedico.tllc}}
+                        <br> <strong>PC: </strong>{{eventoMedico.pc}}
+                        <br> <strong>Menbranas mucosas </strong>
+                        <br> <strong>Oral: </strong>{{eventoMedico.mmOral}}
+                        <br> <strong>Vulvar/prepucial: </strong>{{eventoMedico.mmVulvar}}
+                        <br> <strong>Esclerotica: </strong>{{eventoMedico.mmEsclerotica}}
+                        <br> <strong>Nasal: </strong>{{eventoMedico.mmNasal}}
+                        <br> <strong>Conjuntival: </strong>{{eventoMedico.mmConjuntival}}
+                        <br> <strong>Motilidad instestinal: </strong>{{eventoMedico.motilidadIntestinal}}
+                    </vertical-timeline-card>
+                </div>
+
+            -->
 
             </div>
         </div>

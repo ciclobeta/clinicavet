@@ -8,6 +8,7 @@ import { EventoMedicoService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-historia',
@@ -18,9 +19,10 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 export class HistoriaComponent implements OnInit {
 
   tipoEvento: string = 'CONSULTA';
+  texto: string = 'nada';
   // hospitales: Hospital[] = [];
   pacientes: Paciente[] = [];
-  eventosMedicos: EventoMedico[] = [];
+  eventosMedicosX: EventoMedico[] = [];
   // tslint:disable-next-line:whitespace
   // tslint:disable-next-line:max-line-length
   eventoMedico: EventoMedico = new EventoMedico('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -89,10 +91,10 @@ export class HistoriaComponent implements OnInit {
   }
 
   cargarEventosMedicos( id1: string ) {
-    console.log('Edi. en cargar eventos medicos: ' + id1);
+    console.log('Edi. en cargar eventos medicos id1: ' + id1);
     this._eventoMedicoServie.cargarEventosMedicos(id1)
-          .subscribe( eventosMedicos => this.eventosMedicos = eventosMedicos );
-    console.log('supuestamente ya cargo: ' + this.eventosMedicos);
+          .subscribe( eventosmedicos => this.eventosMedicosX = eventosmedicos);
+    console.log('supuestamente ya cargo id1: ' + this.eventosMedicosX);
   }
 
   guardarEventoMedico( f: NgForm ) {

@@ -20,6 +20,7 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 export class EventoMedicoComponent implements OnInit {
 
   tipoEvento: string = 'CONSULTA';
+  idP = '0';
   // hospitales: Hospital[] = [];
   pacientes: Paciente[] = [];
   // tslint:disable-next-line:whitespace
@@ -43,6 +44,7 @@ export class EventoMedicoComponent implements OnInit {
     activatedRoute.params.subscribe( params => {
 
       let id = params['id'];
+      this.idP = id;
       let tipo = params['tipo'];
       this.tipoEvento = tipo;
       console.log('aqui.... id: ' + id);

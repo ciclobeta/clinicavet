@@ -17,7 +17,7 @@
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarEventoMedico(f)">
                         <div class="form-group">
 
-                            <div *ngIf="!paciente.nombre">
+                            <div *ngIf="idP=='0'">
                                 <label>Paciente</label>
                                 <select (change)="cambioPaciente( $event.target.value )" [(ngModel)]="eventoMedico.paciente" name="paciente" class="form-control" required>
                                     <option value="">Seleccione el paciente</option>
@@ -26,14 +26,14 @@
                                     </option>
                                   </select>
                             </div>
-                            <div *ngIf="paciente.nombre">
-                                <br> <b>{{ paciente.historiaClinica }} </b>: {{ paciente.nombre}}
-                                <br> {{paciente.especie}} ({{paciente.raza}})
-                                <br> {{paciente.sexo}}
-                                <br> Fecha de nacimiento: {{paciente.fechaNacimiento}}
-                                <hr>Propietario: {{paciente.nombrePropietario}}
-                                <br> email: {{paciente.email}}
-                            </div>
+                            <!-- <div *ngIf="idP!=='0'"> -->
+                            <br> <b>{{ paciente.historiaClinica }} </b>: {{ paciente.nombre}}
+                            <br> {{paciente.especie}} ({{paciente.raza}})
+                            <br> {{paciente.sexo}}
+                            <br> Fecha de nacimiento: {{paciente.fechaNacimiento}}
+                            <hr>Propietario: {{paciente.nombrePropietario}}
+                            <br> email: {{paciente.email}}
+                            <!-- </div> -->
                         </div>
                         <br>
 

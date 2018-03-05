@@ -31,3 +31,5 @@
     height: 100%;
     z-index: 9999;
 }
+
+@import "~angular-vertical-timeline/dist/vertical-timeline.css";

@@ -29,7 +29,7 @@ export class EventoMedicoService {
 
                 console.log('Edi... saliendo de cargarEventoMedicos ..');
                 this.totalEventosMedicos = resp.total;
-                return resp.eventosMedicos;
+                return resp.eventosmedicos;
               });
 
   }

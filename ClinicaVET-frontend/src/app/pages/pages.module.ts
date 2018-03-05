@@ -44,6 +44,14 @@ import { QuirofanoComponent } from './quirofano/quirofano.component';
 import { FarmaciaComponent } from './farmacia/farmacia.component';
 import { HistoriaComponent } from './historia/historia.component';
 
+// ------------------
+// import { BrowserModule } from '@angular/platform-browser';
+//   import { NgModule } from '@angular/core';
+
+//   import { AppComponent } from './app.component';
+
+//   Import the timeline library
+ import { VerticalTimelineModule } from 'angular-vertical-timeline';
 
 
 
@@ -83,7 +91,9 @@ import { HistoriaComponent } from './historia/historia.component';
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        // BrowserModule,
+        VerticalTimelineModule
     ]
 })
 export class PagesModule { }
